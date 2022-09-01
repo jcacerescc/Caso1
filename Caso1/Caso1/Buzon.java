@@ -11,7 +11,7 @@ public class Buzon {
     }
 
     public synchronized void almacenar(String mensaje) {
-        while (this.mensajes.size() == this.tamanio) {
+        while (mensajes.size() == tamanio) {
             try {
                 wait();
             } catch (InterruptedException e) {
@@ -19,7 +19,8 @@ public class Buzon {
             }
             
         }
-        this.mensajes.add(mensaje);
+        mensajes.add(mensaje);
+        notifyAll();
     }
 
 

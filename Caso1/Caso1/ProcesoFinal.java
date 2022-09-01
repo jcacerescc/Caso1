@@ -1,21 +1,30 @@
 package Caso1;
 
+
 public class ProcesoFinal extends Thread {
         
-        private String posicion;
         private Buzon buzonAnterior;
-        
-        public ProcesoFinal(String posicion, Buzon buzonAnterior) {
-            this.posicion = posicion;
+        private static String MensajeFinal="";
+       
+        public ProcesoFinal( Buzon buzonAnterior ) {
             this.buzonAnterior = buzonAnterior;
             
+            
         }
-        public void run(){
-            while(true){
+        public static String getMensajeFinal() {
+			return MensajeFinal;
+		}
+		public void run(){
+            
+            for(int i = 1; i <= 6;i ++){
                 String mensaje = buzonAnterior.extraer();
-                System.out.println(mensaje);
-            }
+                MensajeFinal+= ", "+mensaje;
+            
+            ProcesoFinal.yield();}
+            System.out.println("ssse: "+MensajeFinal);
+
         }
+        
 
     
 }

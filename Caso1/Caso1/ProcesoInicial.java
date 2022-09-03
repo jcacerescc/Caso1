@@ -2,7 +2,7 @@ package Caso1;
 import java.util.ArrayList;
 
 public class ProcesoInicial extends Thread {
-    
+    private Boolean estado = true;
     private Buzon buzonSiguiente;
     private ArrayList<String> mensajes = new ArrayList <String>();
 
@@ -24,33 +24,22 @@ public class ProcesoInicial extends Thread {
     
     public void run() {
         crearMensajes();
-        while (!mensajes.isEmpty()) {
+        while ( estado) {
         	//Se depositan los mensajes que quepan dentro del buffer(Buzon)
-        buzonSiguiente.almacenar(mensajes.get(0));
-        
-        mensajes.remove(0);
-      
-    
         if(mensajes.isEmpty())
         {   
-             
             for(int i = 1; i <= 3;i ++){
              buzonSiguiente.almacenar("FIN");
-        }
-        try {
-            ProcesoInicial.sleep(10);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        }
-        
-        
-
 
         }
-        ProcesoInicial.yield();
-        
+        estado=false;    
     }
-}
+        else{ 
+            buzonSiguiente.almacenar(mensajes.get(0));
+            mensajes.remove(0);
+            ProcesoInicial.yield();
+        }
+                
+    }
+}}
     

@@ -16,16 +16,11 @@ public class main{
         System.out.println("Ingrese el número de tamanio buzones de extremos: ");
         int tamanioBuzonExtremo = sc2.nextInt();
         //se crea buzon inicial y final 
-        
-        
-        
-        
-        
-        
-        
+    
         Buzon b0 = new Buzon(tamanioBuzonExtremo);
         
         Buzon bf = new Buzon(tamanioBuzonExtremo);
+        //se crean los buzones
         
         Buzon b1112 = new Buzon(tamanioBuzonIntermedio);
         Buzon b1213 = new Buzon(tamanioBuzonIntermedio);
@@ -35,9 +30,11 @@ public class main{
         
         Buzon b3132 = new Buzon(tamanioBuzonIntermedio);
         Buzon b3233 = new Buzon(tamanioBuzonIntermedio);
-        
 
+        // se cra el proceso inicial, al que se le pasa referencia de la cantidad de mensajes a generar y el buzon inicial
         ProcesoInicial p0 = new ProcesoInicial(b0,n);
+
+        //se crean los procesos intermedios, que reciben como parametro su posicion,el buzon anterior y el siguiente
         ProcesoIntermedio p11= new ProcesoIntermedio("11", b0, b1112);
         ProcesoIntermedio p12= new ProcesoIntermedio("12", b1112,b1213);
         ProcesoIntermedio p13= new ProcesoIntermedio("13", b1213, bf);
@@ -50,11 +47,12 @@ public class main{
         ProcesoIntermedio p32= new ProcesoIntermedio("32", b3132, b3233);
         ProcesoIntermedio p33= new ProcesoIntermedio("33", b3233, bf);
 
-
+        //se crea el proceso final, que reciben como parametro el buzon final
         ProcesoFinal pf=new ProcesoFinal(bf);
       
         
         
+        //se inician los hilos asociados a cada proceso
         
         p0.start();
         p11.start();
